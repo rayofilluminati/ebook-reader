@@ -26,6 +26,11 @@
   import { dummyFn, isMobile$, isOnOldUrl } from '$lib/functions/utils';
   import { createEventDispatcher } from 'svelte';
   import Fa from 'svelte-fa';
+  import {
+    translationEnabled,
+    translationRevision,
+    translationStatus
+  } from '$lib/translation/state';
 
   export let hasChapterData: boolean;
   export let hasText: boolean;
@@ -226,3 +231,44 @@
     />
   </div>
 </div>
+
+{#if $translationEnabled}
+  <div class="translation-status" role="status">
+    <button title="打开翻译设置" on:click={() => dispatch('translationClick')}
+      >{$translationStatus.error
+        ? '翻译已暂停'
+        : $translationStatus.busy
+          ? '正在翻译…'
+          : '日中对照'} · {$translationStatus.completed} 段</button
+    >
+    {#if $translationStatus.error}
+      <button on:click={() => translationRevision.update((value) => value + 1)}>重试</button>
+    {/if}
+    <button aria-label="停止并隐藏翻译" on:click={() => translationEnabled.set(false)}>关闭</button>
+  </div>
+{/if}
+
+<style>
+  .translation-status {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-top: 1px solid #64748b;
+    background: #374151;
+    color: #f3f4f6;
+    writing-mode: horizontal-tb;
+    font-size: 12px;
+  }
+  .translation-status button {
+    min-height: 32px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .translation-status button:hover,
+  .translation-status button:focus-visible {
+    background: #4b5563;
+  }
+</style>

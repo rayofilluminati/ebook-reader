@@ -8,7 +8,6 @@
     saveTranslationConfig,
     translationConfig,
     translationEnabled,
-    translationRevision,
     translationStatus
   } from './state';
 
@@ -162,22 +161,6 @@
   </div>
 </dialog>
 
-{#if $translationEnabled}
-  <div class="translation-status" role="status">
-    <button title="打开翻译设置" on:click={open}
-      >{$translationStatus.error
-        ? '翻译已暂停'
-        : $translationStatus.busy
-          ? '正在翻译…'
-          : '日中对照'} · {$translationStatus.completed} 段</button
-    >
-    {#if $translationStatus.error}
-      <button on:click={() => translationRevision.update((value) => value + 1)}>重试</button>
-    {/if}
-    <button aria-label="停止并隐藏翻译" on:click={() => translationEnabled.set(false)}>关闭</button>
-  </div>
-{/if}
-
 <style>
   .translation-dialog {
     writing-mode: horizontal-tb;
@@ -258,20 +241,5 @@
     border: 1px solid #64748b;
     border-radius: 6px;
     overflow-wrap: anywhere;
-  }
-  .translation-status {
-    position: fixed;
-    right: 12px;
-    bottom: 40px;
-    z-index: 30;
-    display: flex;
-    gap: 10px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    background: #1f2937;
-    color: #f3f4f6;
-    border: 1px solid #64748b;
-    writing-mode: horizontal-tb;
-    font-size: 12px;
   }
 </style>
