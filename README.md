@@ -2,6 +2,8 @@
 
 ## ッツ Ebook Reader
 
+本 fork 支持日中竖排对照翻译，可连接 Ollama、LM Studio 和 OpenAI 兼容云端 API。打开书籍，在阅读工具栏点击「沉浸式翻译」配置并开启。[中文使用说明](docs/immersive-translation.zh-CN.md)
+
 An online e-book reader that supports dictionary extensions like Yomitan, which is hosted on [https://reader.ttsu.app](https://reader.ttsu.app)
 
 **Note**: The reader was created for japanese (language learners) - while books in other languages may work to a specific degree other functionalites (e. g. character counter etc.) may have unsupported / unexpected results

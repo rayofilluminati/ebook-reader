@@ -32,3 +32,6 @@ jobs:
 
       - name: Test build
         run: pnpm build
+
+      - name: Translation client tests
+        run: pnpm --dir apps/web test:translation

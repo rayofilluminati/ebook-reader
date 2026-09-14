@@ -16,6 +16,7 @@ module.exports = (async () => {
     eslintPluginPrettierRecommended,
     {
       ignores: [
+        '**/tests/**',
         '**/build/*',
         '**/.svelte-kit/*',
         '**/service-worker.ts',

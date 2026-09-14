@@ -217,3 +217,21 @@
     url('$lib/assets/fonts/ShipporiMincho-Bold.woff2') format('woff2'),
     url('$lib/assets/fonts/ShipporiMincho-Bold.woff') format('woff');
 }
+// Keep translations in the reader's writing direction, after their source paragraph.
+// Attribute scoping and !important protect the paired layout from EPUB styles.
+.book-content [data-ttu-translation].ttu-translation {
+  display: block !important;
+  writing-mode: inherit !important;
+  text-orientation: mixed !important;
+  font-family: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', 'SimSun', serif !important;
+  font-size: 0.9em !important;
+  line-height: 1.8 !important;
+  color: inherit !important;
+  opacity: 0.8;
+  border-block-start: 1px solid currentColor;
+  padding-block-start: 0.55em;
+  margin-block: 0.55em 1.1em !important;
+  white-space: pre-wrap !important;
+  text-indent: 0 !important;
+  overflow-wrap: anywhere;
+}

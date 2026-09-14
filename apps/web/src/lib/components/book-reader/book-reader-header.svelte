@@ -7,6 +7,7 @@
     faExpand,
     faFlag,
     faList,
+    faLanguage,
     faRotateLeft,
     type IconDefinition
   } from '@fortawesome/free-solid-svg-icons';
@@ -49,6 +50,7 @@
     settingsClick: void;
     domainHintClick: void;
     bookManagerClick: void;
+    translationClick: void;
   }>();
 
   const customReadingPointMenuItems: {
@@ -146,6 +148,14 @@
   </div>
 
   <div class="flex transform-gpu {translateXHeaderFa}">
+    <button
+      title="沉浸式翻译 / 日中竖排对照"
+      aria-label="沉浸式翻译"
+      class={baseIconClasses}
+      on:click={() => dispatch('translationClick')}
+    >
+      <Fa icon={faLanguage} />
+    </button>
     <div
       tabindex="0"
       role="button"

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "test:translation": "node --test tests/translation-client.test.mjs",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",

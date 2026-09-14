@@ -26,6 +26,8 @@
   import { goto } from '$app/navigation';
   import { faCloudBolt, faPause, faPlay, faSpinner } from '@fortawesome/free-solid-svg-icons';
   import BookReader from '$lib/components/book-reader/book-reader.svelte';
+  import TranslationControls from '$lib/translation/translation-controls.svelte';
+  let translationControls: TranslationControls;
   import type {
     AutoScroller,
     BookmarkManager,
@@ -1578,6 +1580,8 @@
   <title>{formatPageTitle($rawBookData$?.title ?? '')}</title>
 </svelte:head>
 
+<TranslationControls bind:this={translationControls} />
+
 {$collectReaderImageGallerySpoilerToggles$ ?? ''}
 {$handleUpdateImageGalleryPictureSpoilers$ ?? ''}
 <button class="fixed inset-x-0 top-0 z-10 h-8 w-full" on:click={() => (showHeader = true)} />
@@ -1588,6 +1592,12 @@
     use:clickOutside={() => (showHeader = false)}
   >
     <BookReaderHeader
+      on:translationClick={() => {
+        pauseTracker();
+        autoScroller?.off();
+        showHeader = false;
+        translationControls.open();
+      }}
       hasChapterData={!!$sectionData$?.length}
       hasText={!!bookCharCount}
       hasCustomReadingPoint={!!(

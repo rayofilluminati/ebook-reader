@@ -8,7 +8,10 @@ import { isNodeGaiji } from '$lib/functions/is-node-gaiji';
 
 export function getParagraphNodes(node: Node) {
   return getTextNodeOrGaijiNodes(node, (n) => {
-    if (n.nodeName === 'RT') {
+    if (
+      n.nodeName === 'RT' ||
+      (n instanceof HTMLElement && n.hasAttribute('data-ttu-translation'))
+    ) {
       return false;
     }
     const isHidden =

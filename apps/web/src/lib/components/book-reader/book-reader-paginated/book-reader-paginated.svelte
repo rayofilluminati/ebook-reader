@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { immersiveTranslation } from '$lib/translation/reader-action';
   import { browser } from '$app/environment';
   import { nextChapter$ } from '$lib/components/book-reader/book-toc/book-toc';
   import HtmlRenderer from '$lib/components/html-renderer.svelte';
@@ -724,6 +725,18 @@
   class:ttu-margin-manual={textMarginMode === 'manual'}
   class:ttu-text-wrap-pretty={enableTextWrapPretty}
   class="book-content m-auto"
+  use:immersiveTranslation={() => {
+    calculator?.updateParagraphPos();
+    if (scrollEl && concretePageManager && width && height) {
+      const pageSize = (verticalMode ? height : width) + gap;
+      const contentSize = verticalMode ? scrollEl.scrollHeight : scrollEl.scrollWidth;
+      const lastPage = Math.max(0, Math.ceil(contentSize / pageSize) - 1) * pageSize;
+      if (virtualScrollPos$.getValue() > lastPage) {
+        concretePageManager.scrollTo(lastPage, false);
+      }
+    }
+    concretePageManager?.updateSectionDataByOffset();
+  }}
   use:swipe={{ timeframe: 500, minSwipeDistance: $swipeThreshold$, touchAction: 'pan-y' }}
   on:swipe={onSwipe}
 >

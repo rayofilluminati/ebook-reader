@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="UTF-8" />
+  <title>Translation browser regression tests</title>
+  <style>
+    body {
+      font: 16px system-ui;
+      padding: 20px;
+    }
+    #fixture {
+      height: 240px;
+      width: 720px;
+      overflow: auto;
+    }
+    [data-ttu-translation] {
+      display: block;
+    }
+  </style>
+  <h1>Translation browser regression tests</h1>
+  <ol id="results"></ol>
+  <div id="fixture" class="book-content"></div>
+  <script type="module" src="./translation-browser.ts"></script>
+</html>

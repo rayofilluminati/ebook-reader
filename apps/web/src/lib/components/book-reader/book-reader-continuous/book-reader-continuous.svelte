@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { immersiveTranslation } from '$lib/translation/reader-action';
   import { browser } from '$app/environment';
   import {
     nextChapter$,
@@ -699,6 +700,12 @@
   class:ttu-margin-manual={textMarginMode === 'manual'}
   class:ttu-text-wrap-pretty={enableTextWrapPretty}
   class="book-content m-auto"
+  use:immersiveTranslation={() => {
+    if (calculator) {
+      calculator.updateParagraphPos();
+      onScroll();
+    }
+  }}
 >
   <HtmlRenderer html={htmlContent} on:load={onHtmlLoad} />
 </div>
